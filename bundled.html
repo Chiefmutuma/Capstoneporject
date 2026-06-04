@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Savannah Precision | Ujima SACCO</title>
+    <!-- Google Fonts for Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Original package.json -->
+    <script type="application/json" id="package-json">
+{
+  "name": "savannah-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  }
+}
+    </script>
+
+    <!-- Original style.css -->
+    <style>
+/* Base & Variables */
+:root {
+  --bg-dark: #0a0e17;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-nav: rgba(10, 14, 23, 0.8);
+  
+  --primary: #d97706; /* Savannah Orange */
+  --primary-glow: rgba(217, 119, 6, 0.4);
+  --secondary: #10b981; /* Fintech Green */
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  
+  --font-family: 'Outfit', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3 {
+  line-height: 1.2;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--primary), #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glassmorphism Utilities */
+.glass-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1.5rem 5%;
+  background: var(--bg-nav);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--primary-glow);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.btn.primary:hover {
+  background: #b45309;
+  transform: translateY(-2px);
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Navbar */
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.logo span {
+  color: var(--primary);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+.nav-links a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+  transition: color 0.3s;
+}
+.nav-links a:hover {
+  color: var(--primary);
+}
+
+/* Sections */
+section {
+  padding: 8rem 5% 4rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.section-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.section-header p {
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  text-align: center;
+  align-items: center;
+}
+.hero h1 {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+.hero p {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+}
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+.hero-bg-shapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+.shape {
+  position: absolute;
+  filter: blur(100px);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+.shape-1 {
+  width: 400px;
+  height: 400px;
+  background: var(--primary);
+  top: -100px;
+  right: -100px;
+  animation: float 10s ease-in-out infinite;
+}
+.shape-2 {
+  width: 300px;
+  height: 300px;
+  background: var(--secondary);
+  bottom: 10%;
+  left: -50px;
+  animation: float 12s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, 40px); }
+}
+
+/* Impact Section */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+.stat-card {
+  text-align: center;
+}
+.stat-card h3 {
+  font-size: 4rem;
+  display: inline-block;
+  color: var(--primary);
+}
+.stat-card .symbol {
+  font-size: 2rem;
+  color: var(--text-muted);
+}
+
+/* Agent Section */
+.agent-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+.agent-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.agent-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.agent-card:hover::before {
+  opacity: 1;
+}
+.agent-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.agent-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.agent-card .role {
+  color: var(--primary);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.features {
+  list-style: none;
+}
+.features li {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+.features li strong {
+  color: var(--text-main);
+}
+
+/* Ethics Section */
+.ethics-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.ethics-block {
+  margin-bottom: 3rem;
+  padding-left: 2rem;
+  border-left: 2px solid var(--primary);
+  position: relative;
+}
+.ethics-block::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  background: var(--primary);
+  border-radius: 50%;
+}
+.ethics-block h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+}
+.ethics-block p {
+  color: var(--text-muted);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Animations */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+
+.fade-in.visible, .fade-up.visible, .fade-left.visible, .fade-right.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.delay-1 { transition-delay: 0.2s; }
+.delay-2 { transition-delay: 0.4s; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.5rem; }
+  .nav-links { display: none; } /* Simple mobile hide for brevity */
+}
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="glass-nav">
+      <div class="logo">Ujima<span>SACCO</span></div>
+      <ul class="nav-links">
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#agents">Agent Pride</a></li>
+        <li><a href="#ethics">Ethics</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1 class="fade-in">The Savannah Precision <br> <span class="gradient-text">AI Ecosystem</span></h1>
+        <p class="fade-in delay-1">Harmonizing algorithmic efficiency with East African economic realities. Driving financial inclusion without compromising risk.</p>
+        <div class="hero-actions fade-in delay-2">
+          <a href="#impact" class="btn primary">Explore Impact</a>
+          <a href="#agents" class="btn secondary">Meet the Pride</a>
+        </div>
+      </div>
+      <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+      </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact" id="impact">
+      <div class="section-header">
+        <h2>Projected Impact</h2>
+        <p>A transformative shift from rigid urban models to dynamic, context-aware lending.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card glass-card fade-up">
+          <h3 class="counter" data-target="37">0</h3><span class="symbol">%</span>
+          <p>Increase in loan approvals for female market vendors.</p>
+        </div>
+        <div class="stat-card glass-card fade-up delay-1">
+          <h3 class="counter" data-target="3">&lt;3</h3><span class="symbol">%</span>
+          <p>Default risk maintained by aligning repayment to harvest cycles.</p>
+        </div>
+        <div class="stat-card glass-card fade-up delay-2">
+          <h3 class="counter" data-target="80">0</h3><span class="symbol">%</span>
+          <p>Of Tier-1 inquiries fully automated.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Agent Pride Section -->
+    <section class="agents" id="agents">
+      <div class="section-header">
+        <h2>The Agent Pride Architecture</h2>
+        <p>A multi-agent ecosystem orchestrated with strict boundaries and seamless handoffs.</p>
+      </div>
+      
+      <div class="agent-cards">
+        <!-- Scout -->
+        <div class="agent-card fade-left">
+          <div class="card-icon">🦁</div>
+          <h3>Scout Agent</h3>
+          <p class="role">Financial Literacy Coach</p>
+          <ul class="features">
+            <li><strong>RANK:</strong> Max 3 SMS/day. Never recommends loans.</li>
+            <li><strong>TRAIL:</strong> Uses harvest calendar context.</li>
+            <li><strong>HUNT:</strong> Escalates on "financial stress" triggers.</li>
+          </ul>
+        </div>
+        
+        <!-- Guardian -->
+        <div class="agent-card fade-up">
+          <div class="card-icon">🛡️</div>
+          <h3>Guardian Agent</h3>
+          <p class="role">Loan Triage Analyst</p>
+          <ul class="features">
+            <li><strong>RANK:</strong> Approves &lt;= KES 15K. Needs 3+ risk flags to deny.</li>
+            <li><strong>TRAIL:</strong> Maps transaction history to district baselines.</li>
+            <li><strong>HUNT:</strong> Escalates complex cases to Hunter.</li>
+          </ul>
+        </div>
+        
+        <!-- Hunter -->
+        <div class="agent-card fade-right">
+          <div class="card-icon">🎯</div>
+          <h3>Hunter Agent</h3>
+          <p class="role">Human-in-Loop Coordinator</p>
+          <ul class="features">
+            <li><strong>RANK:</strong> NEVER approves/denies. Preps briefings only.</li>
+            <li><strong>TRAIL:</strong> Knows human officer specialty areas.</li>
+            <li><strong>HUNT:</strong> Prepares packet for final human decision.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ethical Architecture Section -->
+    <section class="ethics" id="ethics">
+      <div class="section-header">
+        <h2>Ethical Architecture & Data Sovereignty</h2>
+        <p>Dignity-centered design respecting the Kenya DPA 2022.</p>
+      </div>
+      <div class="ethics-content">
+        <div class="ethics-text">
+          <div class="ethics-block fade-in">
+            <h3>ETHOS & TRACK Frameworks</h3>
+            <p>We've eliminated urban-centric biases that penalized erratic cash flows, actively monitoring algorithmic bias against vulnerable groups.</p>
+          </div>
+          <div class="ethics-block fade-in delay-1">
+            <h3>OASIS Protocol</h3>
+            <p>100% of member data remains under African governance (AWS Africa Region). Strict k-anonymity protects member privacy in rural villages.</p>
+          </div>
+          <div class="ethics-block fade-in delay-2">
+            <h3>PRIDE Loop Oversight</h3>
+            <p>Mandatory human review for large loans (>50K KES) or vulnerable profiles (e.g., households with young children).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>&copy; 2026 Ujima SACCO. All data sovereign to the African continent.</p>
+    </footer>
+
+    <!-- Original main.js -->
+    <script>
+// Scroll Animation Setup
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            
+            // Trigger counter animation if it's a stat card
+            if(entry.target.classList.contains('stat-card')) {
+                const counter = entry.target.querySelector('.counter');
+                if(counter && !counter.classList.contains('counted')) {
+                    animateValue(counter, 0, parseInt(counter.getAttribute('data-target')), 2000);
+                    counter.classList.add('counted');
+                }
+            }
+            
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+// Observe all elements with animation classes
+document.querySelectorAll('.fade-in, .fade-up, .fade-left, .fade-right').forEach(el => {
+    observer.observe(el);
+});
+
+// Counter Animation Function
+function animateValue(obj, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        
+        // Easing function for smoother counting
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        
+        // Handle the "<3" special case
+        const currentVal = Math.floor(easeOutQuart * (end - start) + start);
+        if(obj.getAttribute('data-target') === '3') {
+             obj.innerHTML = currentVal === end ? '&lt;3' : '&lt;' + currentVal;
+        } else {
+             obj.innerHTML = currentVal;
+        }
+
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+    </script>
+  </body>
+</html>
